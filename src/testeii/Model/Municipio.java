@@ -19,13 +19,14 @@ public class Municipio implements Serializable {
 
     public Municipio() {
         this.provincia = "Maputo";
-        this.quantidadeRecenciados = gerarNumeroAleatorio(5, 30);
     }
 
-    public static int gerarNumeroAleatorio(int min, int max) {
-        Random random = new Random();
-        int numeroAleatorio = random.nextInt(max - min + 1) + min;
-        return numeroAleatorio;
+    public int getQuantidadeDeRecenciado() {
+        return this.quantidadeRecenciados;
+    }
+
+    public void setQuantidadeDeRecenciado(int quantidadeRecenciados) {
+        this.quantidadeRecenciados = quantidadeRecenciados;
     }
 
 }

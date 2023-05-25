@@ -7,8 +7,8 @@ import java.util.Date;
 
 public class Voto implements Serializable {
 
-    boolean isNull;
-    boolean isValid;
+    public boolean isNull;
+    public boolean isValid;
 
     String date = getDateTime();
 

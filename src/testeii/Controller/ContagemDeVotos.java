@@ -12,6 +12,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import testeii.Model.Candidato;
 import testeii.Model.Municipio;
+import testeii.Model.Voto;
 
 public class ContagemDeVotos {
 
@@ -39,7 +40,9 @@ public class ContagemDeVotos {
     }
 
     public double VotoNulo(Candidato canditadoAreceberOvoto) {
+        System.out.println("Candidato a receber votot nulo" + canditadoAreceberOvoto);
         canditadoAreceberOvoto.setVotos(true, false);
+        database.atualizar(canditadoAreceberOvoto);
         return canditadoAreceberOvoto.getVotos();
     }
 
@@ -74,8 +77,10 @@ public class ContagemDeVotos {
     }
 
     public Municipio CriaMunicipio(String nome) {
+
         Municipio Municipio = new Municipio();
         Municipio.setNome(nome);
+
         return Municipio;
     }
 
@@ -119,4 +124,36 @@ public class ContagemDeVotos {
         }
         return candidatofiltrado;
     }
+
+    public double totaldevotosSegundoUmMunicipio(String nomeMunicipio) {
+        ArrayList<Candidato> CANDIDATOSLIDOS = database.getDados();
+        double todosVotados = 0;
+        for (Candidato candidato : CANDIDATOSLIDOS) {
+            if (candidato.municipio.getNome().equals(nomeMunicipio)) {
+                System.out.println(candidato.municipio.getQuantidadeDeRecenciado());
+                todosVotados = todosVotados + candidato.getVotos();
+            }
+        }
+        return todosVotados;
+    }
+
+    public double totaldevotosbranco() {
+        try {
+            ArrayList<Candidato> CANDIDATOSLIDOS = database.getDados();
+            double todosVotados = 0;
+            for (Candidato candidato : CANDIDATOSLIDOS) {
+                for (Voto voto : candidato.votosTotal()) {
+                    System.out.println(voto.isNull);
+                    if (voto.isNull) {
+                        todosVotados = todosVotados + 1;
+                    }
+                }
+            }
+            return todosVotados;
+        } catch (Exception e) {
+            System.out.println("Erro");
+            return 0;
+        }
+    }
+
 }

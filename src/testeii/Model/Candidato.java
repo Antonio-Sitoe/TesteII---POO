@@ -33,6 +33,10 @@ public class Candidato implements Serializable {
         return this.votos.size();
     }
 
+    public ArrayList<Voto> votosTotal() {
+        return this.votos;
+    }
+
     public void setVotos(boolean isNull, boolean isValid) {
         Voto novoVoto = new Voto(isNull, isValid);
         votos.add(novoVoto);
